@@ -255,7 +255,7 @@
                                     <th class="column-2"></th>
                                     <th class="column-3">Price</th>
                                     <th class="column-4">Quantity</th>
-                                    <th class="column-5">Total</th>
+                                    <th class="column-5"></th>
                                 </tr>
     
                                 @if ($cart && $cart->products->isNotEmpty())
@@ -279,7 +279,13 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="column-5">{{ number_format($item->product->price * $item->product_quantity, 0, ',', '.') }} vnđ</td>
+                                        <td class="column-5">        <td class="cart__close">
+                                            <form action="{{ route('cart.destroy', $item->product->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </form>
+                                        </td></td>
                                     </tr>
                                     @endforeach
                                 @else

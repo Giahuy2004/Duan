@@ -32,6 +32,16 @@ class CartController extends Controller
     }
     public function store(Request $request)
     {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');
+        }
+    
+        $product = $this->product->find($request->product_id);
+        
+        // Nếu không tìm thấy sản phẩm, có thể cần xử lý thêm
+        if (!$product) {
+            return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
+        }
         $product = $this->product->find($request->product_id);
         $cart = $this->cart->firstOrCreate(['user_id' => auth()->user()->id])->load('products');
         $cartProduct = $this->cartProduct->getBy($cart->id, $product->id);
