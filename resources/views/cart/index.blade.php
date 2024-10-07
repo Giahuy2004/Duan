@@ -252,7 +252,7 @@
                             <table class="table-shopping-cart">
                                 <tr class="table_head">
                                     <th class="column-1">Product</th>
-                                    <th class="column-2"></th>
+                                    <th class="column-2">Tên</th>
                                     <th class="column-3">Price</th>
                                     <th class="column-4">Quantity</th>
                                     <th class="column-5"></th>
@@ -279,13 +279,13 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="column-5">        <td class="cart__close">
+                                        <td class="column-5">     
                                             <form action="{{ route('cart.destroy', $item->product->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">Xóa</button>
                                             </form>
-                                        </td></td>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 @else
